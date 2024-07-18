@@ -1,0 +1,14 @@
+{
+    "ingredientes": [
+      {
+        "id": "001",
+        "nome": "Farinha de trigo",
+        "quantidade_estoque": 50,
+        "unidade_medida": "kg",
+        "preco_unidade": 3.50,
+        "fornecedor": "Fornecedor Bruna",
+        "data_ultima_compra": "2024-01-10"
+      }
+    ]
+  }
+  

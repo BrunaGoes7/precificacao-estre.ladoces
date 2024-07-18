@@ -1,0 +1,13 @@
+{
+    "vendas": [
+      {
+        "id_venda": "V001",
+        "data_venda": "2024-07-01",
+        "produto_vendido": "R001",
+        "quantidade_vendida": 2,
+        "preco_venda": 20.00,
+        "receita_gerada": 40.00 
+      }
+    ]
+  }
+  

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Precificação</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Calculadora de Precificação</h1>
+
+    <div class="tabs">
+        <button class="tablink" onclick="openTab(event, 'Inicio')">Início</button>
+        <button class="tablink" onclick="openTab(event, 'Ingredientes')">Ingredientes</button>
+        <button class="tablink" onclick="openTab(event, 'Receitas')">Receitas</button>
+        <button class="tablink" onclick="openTab(event, 'Registros')">Registros</button>
+    </div>
+
+    <div id="Inicio" class="tabcontent">
+        <h2>Bem-vindo à Calculadora de Precificação</h2>
+        <p>Aqui estão as orientações sobre como usar esta aplicação:</p>
+        <ol>
+            <li>Vá para a aba "Ingredientes" para adicionar ou atualizar os ingredientes que você utiliza.</li>
+            <li>Na aba "Ingredientes", insira o nome do ingrediente, a quantidade na embalagem em gramas e o preço da embalagem.</li>
+            <li>Depois, vá para a aba "Receitas" para calcular o custo da sua receita.</li>
+            <li>Na aba "Receitas", selecione o ingrediente e insira a quantidade utilizada em gramas. O custo proporcional será calculado automaticamente.</li>
+            <li>Os resultados totais e o preço sugerido para venda serão exibidos na seção de resultados.</li>
+        </ol>
+        <p>Se tiver dúvidas, consulte o manual do usuário ou entre em contato com o suporte.</p>
+    </div>
+
+    <div id="Ingredientes" class="tabcontent">
+        <h2>Base de Ingredientes</h2>
+        <form id="ingredienteForm">
+            <input type="text" id="ingredienteNome" placeholder="Nome do ingrediente (A)" required>
+            <input type="number" id="ingredienteQuantidade" placeholder="Quantidade na embalagem (g) (B)" required>
+            <input type="number" id="ingredientePreco" placeholder="Preço (R$) (C)" step="0.01" required>
+            <button type="submit">Adicionar/Atualizar Ingrediente</button>
+        </form>
+        <div id="ingredientesDados"></div>
+    </div>
+
+    <div id="Receitas" class="tabcontent">
+        <h2>Calcular Receita</h2>
+        <form id="receitaForm">
+            <input type="text" id="nomeReceita" placeholder="Nome da receita" required>
+            <input type="date" id="dataReceita" placeholder="Data" required>
+            <input type="text" id="receitaIngrediente" placeholder="Ingrediente (A)" required>
+            <input type="number" id="ingredienteQuantidadeUsada" placeholder="Gramas utilizadas (D)" required>
+            <button type="button" onclick="adicionarIngredienteReceita()">Adicionar Ingrediente</button>
+        </form>
+        <table id="receitaTabela">
+            <thead>
+                <tr>
+                    <th>Ingredientes (A)</th>
+                    <th>Custo dos Ingredientes (B)</th>
+                    <th>Quantas em Gramas da Embalagem Fechada (C)</th>
+                    <th>Gramas Utilizadas (D)</th>
+                    <th>Quanto Custou (E)</th>
+                </tr>
+            </thead>
+            <tbody id="receitaIngredientesDados"></tbody>
+        </table>
+
+        <h3>Resultado</h3>
+        <p>Total Custo dos Ingredientes: <span id="totalCustoIngredientes">R$ 0.00</span></p>
+        <p>Adiciona 25% (custos incalculáveis): <span id="custosIncalculaveis">R$ 0.00</span></p>
+        <p>Multiplica por 3 (lucro e mão de obra): <span id="lucroMaoDeObra">R$ 0.00</span></p>
+        <p>Rendimento / quantas unidades: <input type="number" id="rendimentoUnidades" value="1" oninput="calcularPrecoFinal()"></p>
+        <p>Preço por Embalagem Individual: <input type="number" id="precoEmbalagemIndividual" value="0.00" step="0.01" oninput="calcularPrecoFinal()"></p>
+        <p>Preço final de venda por unidade: <span id="precoFinalVenda">R$ 0.00</span></p>
+        <button onclick="salvarReceita()">Salvar Receita</button>
+    </div>
+
+    <div id="Registros" class="tabcontent">
+        <h2>Registros de Receitas</h2>
+        <table id="registrosTabela">
+            <thead>
+                <tr>
+                    <th>Nome da Receita</th>
+                    <th>Data</th>
+                    <th>Valor Sugerido</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="registrosDados"></tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
