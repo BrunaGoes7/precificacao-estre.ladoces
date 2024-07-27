@@ -1,16 +1,17 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-// Servindo arquivos estáticos da pasta 'public'
-app.use(express.static('public'));
+// Servir arquivos estáticos da pasta 'docs'
+app.use(express.static(path.join(__dirname, 'docs')));
 
-// Endpoint para servir dados JSON estáticos
-app.get('/data/:file', (req, res) => {
-    res.sendFile(path.join(__dirname, 'data', `${req.params.file}`));
+// Rota para retornar o index.html
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'docs', 'index.html'));
 });
 
+// Iniciar o servidor
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
